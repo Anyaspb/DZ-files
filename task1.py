@@ -15,19 +15,15 @@ with open('recipes.txt') as file:
         cook_book[recipy_name] = ingredients
         file.readline()
 from pprint import pprint
-pprint(cook_book,width=100)
-
-
-
+pprint(cook_book, width=100)
+# Task2
 def get_shop_list_by_dishes(dishes, person_count):
     res = {}
     for dish in dishes:
-        for i in range(len(cook_book[dish])):
-            item = cook_book[dish][i]
-            res[item['ingredient_name']] = {'measure': item['measure'],'quantity': int(item['quantity'])*person_count}
+        for x in range(len(cook_book[dish])):
+            item = cook_book[dish][x]
+            res[item['ingredient_name']] = {'measure': item['measure'],
+                                            'quantity': int(item['quantity']) * person_count}
     return res
-
 print("Список покупок")
 pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
-
-
