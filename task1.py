@@ -22,8 +22,14 @@ def get_shop_list_by_dishes(dishes, person_count):
     for dish in dishes:
         for x in range(len(cook_book[dish])):
             item = cook_book[dish][x]
-            res[item['ingredient_name']] = {'measure': item['measure'],
-                                            'quantity': int(item['quantity']) * person_count}
+            qtty = [int(item['quantity'])]
+            if item['ingredient_name'] in res:
+                qtty.append(int(item['quantity']))
+                res[item['ingredient_name']] = {'measure': item['measure'],
+                                                'quantity': sum(qtty) * person_count}
+            else:
+                res[item['ingredient_name']] = {'measure': item['measure'],
+                                                'quantity': int(item['quantity']) * person_count}
     return res
 print("Список покупок")
 pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
